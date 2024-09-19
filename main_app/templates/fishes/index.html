@@ -20,25 +20,26 @@
 </section>
 
 <section class="card-container">
-  {% for fish in fishes %}
-    <div class="card">
-      <div class="card-content">
-        <div class="card-img-container">
-          <img 
-            src="{% static 'images/sk8r-boi-cat.svg' %}" 
-            alt="A skater boy fish"
-          >
-        </div>
-        <h2 class="card-title">{{ fish.name }}</h2>
-        {% if fish.age > 0 %}
-          <p>A {{ fish.age }} year old {{ fish.breed }}</p>
-        {% else %}
-          <p>A {{ fish.breed }} fish.</p>
-        {% endif %}
-        <p><small>{{ fish.description }}</small></p>
+    {% for fish in fishes %}
+      <div class="card">
+        <a href="{% url 'fish-detail' fish.id %}">
+          <div class="card-content">
+            <div class="card-img-container">
+              <img 
+                src="{% static 'images/sk8r-boi-cat.svg' %}" 
+                alt="A skater boy cat"
+              >
+            </div>
+            <h2 class="card-title">{{ fish.name }}</h2>
+            {% if fish.age > 0 %}
+              <p>A {{ fish.age }} year old {{ fish.breed }}</p>
+            {% else %}
+              <p>A {{ fish.breed }} fish.</p>
+            {% endif %}
+          </div>
+        </a>
       </div>
-    </div>
-  {% endfor %}
-</section>
+    {% endfor %}
+  </section>
 
 {% endblock %}
