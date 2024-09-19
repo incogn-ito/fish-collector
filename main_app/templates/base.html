@@ -20,16 +20,19 @@
 <body>
   <header>
     <div class="header-logo-container">
-        <img 
-        src="{% static 'images/header-logo.svg' %}"
-        alt="The Fish Collector Logo"
-        >
-      </a>
+        <a href="{% url 'home' %}">
+            <img 
+              src="{% static 'images/header-logo.svg' %}"
+              alt="The Fish Collector Logo"
+            >
+        </a>
     </div>
     <nav>
       <ul>
-        <li><a href="/fishes">All Fishes</a></li>
-        <li><a href="/about">About</a></li>      </ul>
+        <li><a href="{% url 'fish-index' %}">All Fish</a></li>
+        <li><a href="{% url 'fish-create' %}">Add a Cat</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+      </ul>
     </nav>
   </header>
   <main>
