@@ -31,8 +31,8 @@ def add_feeding(request, fish_id):
 
 class FishCreate(CreateView):
   model = Fish
-  fields = '__all__'
-  success_url = '/fishes/'
+  fields = ['name', 'breed', 'age', 'description']  
+  # success_url = '/fishes/' --> I don't think I need this.
 
 class FishUpdate(UpdateView):
   model = Fish
