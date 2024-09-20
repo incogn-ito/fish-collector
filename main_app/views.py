@@ -18,8 +18,13 @@ def fish_index(request):
 
 def fish_detail(request, fish_id):
   fish = Fish.objects.get(id=fish_id)
+  # Get the toys the fish doesn't have
+  toys_fish_doesnt_have = Toy.objects.exclude(id__in = fish.toys.all().values_list('id'))
   feeding_form = FeedingForm()
-  return render(request, 'fishes/detail.html', { 'fish': fish, 'feeding_form': feeding_form })
+  return render(request, 'fishes/detail.html', {
+    # Add the toys to be displayed
+    'fish': fish, 'feeding_form': feeding_form, 'toys': toys_fish_doesnt_have
+  })
 
 def add_feeding(request, fish_id):
   form = FeedingForm(request.POST)
@@ -27,6 +32,11 @@ def add_feeding(request, fish_id):
     new_feeding = form.save(commit=False)
     new_feeding.fish_id = fish_id
     new_feeding.save()
+  return redirect('fish-detail', fish_id=fish_id)
+
+def assoc_toy(request, fish_id, toy_id):
+  # Note that you can pass a toy's id instead of the whole object
+  Fish.objects.get(id=fish_id).toys.add(toy_id)
   return redirect('fish-detail', fish_id=fish_id)
 
 class FishCreate(CreateView):

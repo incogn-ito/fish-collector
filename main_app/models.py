@@ -43,6 +43,7 @@ class Feeding(models.Model):
     # set the default value for meal to be 'B'
     default=MEALS[0][0]
   )
+  
   fish = models.ForeignKey(Fish, on_delete=models.CASCADE)
   
   def __str__(self):
