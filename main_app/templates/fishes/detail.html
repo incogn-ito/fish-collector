@@ -100,5 +100,36 @@
       {% endif %}
     </section>
   </div>
+  <section class="toys">
+    <div class="subsection-title">
+      <h2>Toys</h2>
+      <img src="{% static 'images/string.svg' %}" alt="A ball of string" />
+      <img src="{% static 'images/mouse.svg' %}" alt="A mouse" />
+      <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
+    </div>
+    <h3>{{ fish.name }}'s Toys</h3>
+    <div class="subsection-content">
+      {% if fish.toys.count %}
+        {% for toy in fish.toys.all %}
+          <div class="toy-container">
+            <div 
+              class="color-block"
+              style="background-color: {{ toy.color }}"
+            ></div>
+            <a href="{% url 'toy-detail' toy.id %}">
+              <p>A {{ toy.color }} {{ toy.name }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-toys">{{fish.name}} doesn't have any toys 😞</p>
+      {% endif %}
+    </div>
+    <h3>Available Toys</h3>
+    <div class="subsection-content">
+      {% comment %} We'll display available toys here {% endcomment %}
+    </div>
+  </section>
+</div>
   
   {% endblock %}
