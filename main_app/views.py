@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
+from django.contrib.auth.views import LoginView
 from .models import Fish, Toy
 from .forms import FeedingForm
-from django.views.generic import ListView, DetailView
 
 # Define the home view
-def home(request):
-  return render(request, 'home.html')
+class Home(LoginView):
+  template_name = 'home.html'
 
 def about(request):
   return render(request, 'about.html')
@@ -41,8 +42,14 @@ def assoc_toy(request, fish_id, toy_id):
 
 class FishCreate(CreateView):
   model = Fish
-  fields = ['name', 'breed', 'age', 'description']  
-  # success_url = '/fishes/' --> I don't think I need this.
+  fields = ['name', 'breed', 'age', 'description']
+  
+  def form_valid(self, form):
+    # Assign the logged in user (self.request.user)
+    form.instance.user = self.request.user  
+    # form.instance is the fish
+    # Let the CreateView do its job as usual
+    return super().form_valid(form)
 
 class FishUpdate(UpdateView):
   model = Fish
