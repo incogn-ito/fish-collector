@@ -70,6 +70,11 @@
         autocomplete="off"
       >
         {% csrf_token %}
+        {% if fish.fed_for_today %}
+          <p class="fed">{{fish.name}} has been fed all their meals for today!</p>
+        {% else %}
+          <p class="unfed">{{fish.name}} might be hungry!</p>
+        {% endif %}
         {{ feeding_form.as_p }}
         <button type="submit" class="btn submit">Add Feeding</button>
       </form>
