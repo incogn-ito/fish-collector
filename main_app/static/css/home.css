@@ -24,15 +24,22 @@ main {
   }
   
   .fish-container {
-    width: 80%;
+    width: 100%;
+    max-width: 375px;
   }
   
+  .logo-container img {
+    width: 100%;
+    max-width: 520px; /* Controls the logo size */
+    height: auto;     /* Keeps aspect ratio intact */
+    }
+      
   .login {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 20%;
   }
   
   .login h1 {
