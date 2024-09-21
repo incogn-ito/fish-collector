@@ -203,7 +203,7 @@ html {
     }
   
     nav {
-      /* margin-left: auto; */
+      margin-left: auto;
       display: flex;
       justify-content: center;
     }
