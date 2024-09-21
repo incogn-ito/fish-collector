@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from .models import Fish, Toy
 from .forms import FeedingForm
@@ -12,11 +16,13 @@ class Home(LoginView):
 def about(request):
   return render(request, 'about.html')
 
-# Add new view
+@login_required
 def fish_index(request):
-  fishes = Fish.objects.all()
+  # fishes = Fish.objects.all()
+  fishes = Fish.objects.filter(user=request.user)
   return render(request, 'fishes/index.html', { 'fishes': fishes })
 
+@login_required
 def fish_detail(request, fish_id):
   fish = Fish.objects.get(id=fish_id)
   # Get the toys the fish doesn't have
@@ -27,6 +33,7 @@ def fish_detail(request, fish_id):
     'fish': fish, 'feeding_form': feeding_form, 'toys': toys_fish_doesnt_have
   })
 
+@login_required
 def add_feeding(request, fish_id):
   form = FeedingForm(request.POST)
   if form.is_valid():
@@ -35,12 +42,13 @@ def add_feeding(request, fish_id):
     new_feeding.save()
   return redirect('fish-detail', fish_id=fish_id)
 
+@login_required
 def assoc_toy(request, fish_id, toy_id):
   # Note that you can pass a toy's id instead of the whole object
   Fish.objects.get(id=fish_id).toys.add(toy_id)
   return redirect('fish-detail', fish_id=fish_id)
 
-class FishCreate(CreateView):
+class FishCreate(LoginRequiredMixin, CreateView):
   model = Fish
   fields = ['name', 'breed', 'age', 'description']
   
@@ -51,28 +59,48 @@ class FishCreate(CreateView):
     # Let the CreateView do its job as usual
     return super().form_valid(form)
 
-class FishUpdate(UpdateView):
+class FishUpdate(LoginRequiredMixin, UpdateView):
   model = Fish
   fields = ['breed', 'description', 'age']
 
-class FishDelete(DeleteView):
+class FishDelete(LoginRequiredMixin, DeleteView):
   model = Fish
   success_url = '/fishes/'
 
-class ToyCreate(CreateView):
+class ToyCreate(LoginRequiredMixin, CreateView):
   model = Toy
   fields = '__all__'
 
-class ToyList(ListView):
+class ToyList(LoginRequiredMixin, ListView):
   model = Toy
 
-class ToyDetail(DetailView):
+class ToyDetail(LoginRequiredMixin, DetailView):
   model = Toy
 
-class ToyUpdate(UpdateView):
+class ToyUpdate(LoginRequiredMixin, UpdateView):
   model = Toy
   fields = ['name', 'color']
 
-class ToyDelete(DeleteView):
+class ToyDelete(LoginRequiredMixin, DeleteView):
   model = Toy
   success_url = '/toys/'
+
+def signup(request):
+  error_message = ''
+  if request.method == 'POST':
+    # This is how to create a 'user' form object
+    # that includes the data from the browser
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      # This will add the user to the database
+      user = form.save()
+      # This is how we log a user in
+      login(request, user)
+      return redirect('fish-index')
+    else:
+      error_message = 'Invalid sign up - try again'
+  # A bad POST or a GET request, so render signup.html with an empty form
+  form = UserCreationForm()
+  context = {'form': form, 'error_message': error_message}
+  return render(request, 'signup.html', context)
+  # Same as: return render(request, 'signup.html', {'form': form, 'error_message': error_message})

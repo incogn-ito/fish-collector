@@ -12,6 +12,7 @@ urlpatterns = [
   path('fishes/<int:pk>/delete/', views.FishDelete.as_view(), name='fish-delete'),
   path('fishes/<int:fish_id>/add-feeding/', views.add_feeding, name='add-feeding'),
   path('fishes/<int:fish_id>/assoc-toy/<int:toy_id>/', views.assoc_toy, name='assoc-toy'),
+  path('accounts/signup/', views.signup, name='signup'),
   path('toys/create/', views.ToyCreate.as_view(), name='toy-create'),
   path('toys/<int:pk>/', views.ToyDetail.as_view(), name='toy-detail'),
   path('toys/', views.ToyList.as_view(), name='toy-index'),
