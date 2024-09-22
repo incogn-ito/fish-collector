@@ -23,10 +23,7 @@
 
 <section class="cat-container">
   <div class="cat-img">
-    <img 
-      src="{% static 'images/sk8r-boi-cat.svg' %}" 
-      alt="A skater boy cat"
-    >
+    <img src="{% static fish.image_url %}" alt="{{ fish.name }}">
   </div>
   <div class="cat-details">
     <h1>{{ fish.name }}</h1>
@@ -40,7 +37,7 @@
         <a href="{% url 'fish-update' fish.id %}" class="btn warn">Edit</a>
         <a href="{% url 'fish-delete' fish.id %}" class="btn danger">Delete</a>
       </div>
-    </div>
+  </div>  
   </section>
   {% comment %} Existing cat-container above {% endcomment %}
   <div class="feedings-toy-container">
@@ -48,16 +45,8 @@
       <div class="subsection-title">
         <h2>Feedings</h2>
         <img 
-          src="{% static 'images/cat-cone.svg' %}" 
-          alt="An ice cream cone cat"
-        />
-        <img 
-          src="{% static 'images/cat-onigiri.svg' %}"
-          alt="A cat as onigiri"
-        />
-        <img 
-          src="{% static 'images/kitty-kabob.svg' %}" 
-          alt="A kabob of kittens"
+          src="{% static 'images/Fish-feeding.png' %}" 
+          alt="Fish food icons"
         />
       </div>
       {% comment %} New code below {% endcomment %}

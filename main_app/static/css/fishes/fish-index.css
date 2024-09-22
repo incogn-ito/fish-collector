@@ -1,38 +1,65 @@
+h1 {
+  text-wrap: nowrap;
+}
+
 .card-container {
-    padding: 0 30px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .card {
-    width: 275px;
-    margin: 10px;
-    border: var(--borders);
-    box-shadow: var(--card-box-shadow);
-  }
-  
-  .card-content {
-    padding: 10px;
-    width: 100%;
-  }
-  
-  .usr-img {
-    width: 100%;
-    border-radius: var(--card-border-radius);
-  }
-  
-  .card > a {
-    text-decoration: none;
-    color: var(--text-color);
-  }
-  
-  .card h2 {
-    margin: 10px 0;
-    font-size: var(--font-xl);
-  }
-  
-  .card p {
-    margin: 5px 0;
-    font-size: var(--font-reg);
-  }
+  padding: 0 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 275px;
+  margin: 10px;
+  border: var(--borders);
+  box-shadow: var(--card-box-shadow);
+  overflow: hidden; /* Ensures no content overflows the card */
+  border-radius: var(--card-border-radius);
+}
+
+.card-content {
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Ensure the image container has a defined height and no overflow */
+.card-img-container {
+  width: 100%;
+  height: 300px; /* Adjust height based on your preferred size */
+  overflow: hidden; /* Prevents the image from overflowing the card */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Make the image responsive and fill the container */
+.card-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire container without distortion */
+  border-radius: var(--card-border-radius) var(--card-border-radius) 0 0;
+}
+
+.usr-img {
+  width: 100%;
+  border-radius: var(--card-border-radius);
+}
+
+.card > a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.card h2 {
+  margin: 10px 0;
+  padding: 0 10px;
+  font-size: var(--font-xl);
+}
+
+.card p {
+  margin: 5px 0;
+  padding: 0 10px 10px;
+  font-size: var(--font-reg);
+}

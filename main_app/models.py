@@ -26,6 +26,7 @@ class Fish(models.Model):
   age = models.IntegerField()
   toys = models.ManyToManyField(Toy)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
+  image_url = models.CharField(max_length=255, null=True, blank=True)
 
   def fed_for_today(self):
     return self.feeding_set.filter(date=date.today()).count() >= len(MEALS)

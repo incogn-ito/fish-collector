@@ -13,33 +13,38 @@
 
 <section class="page-header">
   <h1>Fish List</h1>
-  <img src="{% static 'images/cool-cat.svg' %}" alt="A cool cat" />
-  <img src="{% static 'images/happy-cat.svg' %}" alt="A happy cat" />
-  <img src="{% static 'images/teacup-cat.svg' %}" alt="A cat in a teacup" />
-  <img src="{% static 'images/cat-in-box.svg' %}" alt="A cat in a box" />
+  <img src="{% static 'images/Angel-fish.png' %}" alt="Angel fish" />
+  <img src="{% static 'images/Betta-fish.png' %}" alt="Betta fish" />
+  <img src="{% static 'images/Blue-tang-fish.png' %}" alt="Blue tang fish" />
+  <img src="{% static 'images/Clownfish.png' %}" alt="Clownfish" />
+  <img src="{% static 'images/default-fish.png' %}" alt="Default rainbow fish" />
+  <img src="{% static 'images/Goby-fish.png' %}" alt="Goby fish" />
+  <img src="{% static 'images/Goldfish.png' %}" alt="Golfish" />
+  <img src="{% static 'images/Lionfish.png' %}" alt="Lionfish" />
+  <img src="{% static 'images/Puffer-fish.png' %}" alt="Puffer fish" />
+  <img src="{% static 'images/Rainbow-fish.png' %}" alt="Rainbow fish" />
+  <img src="{% static 'images/Red-snapper-fish.png' %}" alt="Red snapper fish" />
+  <img src="{% static 'images/Swordfish.png' %}" alt="Swordfish" />
+  <img src="{% static 'images/Trigger-fish.png' %}" alt="Trigger fish" />
+  <img src="{% static 'images/Wrasse-fish.png' %}" alt="Wrasse fish" />
 </section>
 
 <section class="card-container">
-    {% for fish in fishes %}
-      <div class="card">
-        <a href="{% url 'fish-detail' fish.id %}">
-          <div class="card-content">
-            <div class="card-img-container">
-              <img 
-                src="{% static 'images/sk8r-boi-cat.svg' %}" 
-                alt="A skater boy cat"
-              >
-            </div>
-            <h2 class="card-title">{{ fish.name }}</h2>
-            {% if fish.age > 0 %}
-              <p>A {{ fish.age }} year old {{ fish.breed }}</p>
-            {% else %}
-              <p>A {{ fish.breed }} fish.</p>
-            {% endif %}
-          </div>
-        </a>
+  {% for fish in fishes %}
+  <div class="card">
+    <a href="{% url 'fish-detail' fish.id %}">
+      <div class="card-img-container">
+        <img src="{% static fish.image_url %}" alt="{{ fish.name }}">
       </div>
-    {% endfor %}
+      <h2 class="card-title">{{ fish.name }}</h2>
+      {% if fish.age > 0 %}
+        <p>A {{ fish.age }} year old {{ fish.breed }} fish</p>
+      {% else %}
+        <p>A {{ fish.breed }} fish.</p>
+      {% endif %}
+    </a>
+  </div>
+{% endfor %}
   </section>
 
 {% endblock %}

@@ -6,8 +6,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 from .models import Fish, Toy
 from .forms import FeedingForm
+from .forms import FishForm
 
 # Define the home view
 class Home(LoginView):
@@ -49,19 +51,23 @@ def assoc_toy(request, fish_id, toy_id):
   return redirect('fish-detail', fish_id=fish_id)
 
 class FishCreate(LoginRequiredMixin, CreateView):
-  model = Fish
-  fields = ['name', 'breed', 'age', 'description']
-  
-  def form_valid(self, form):
+    model = Fish
+    form_class = FishForm  # Use the form with image selection
+    template_name = 'fishes/fish_form.html'
+    success_url = reverse_lazy('fish-index')
+    
+    def form_valid(self, form):
     # Assign the logged in user (self.request.user)
-    form.instance.user = self.request.user  
+      form.instance.user = self.request.user  
     # form.instance is the fish
     # Let the CreateView do its job as usual
-    return super().form_valid(form)
+      return super().form_valid(form)
 
 class FishUpdate(LoginRequiredMixin, UpdateView):
-  model = Fish
-  fields = ['breed', 'description', 'age']
+    model = Fish
+    form_class = FishForm  # Use the same form for updating
+    template_name = 'fishes/fish_form.html'
+    success_url = reverse_lazy('fish-index')
 
 class FishDelete(LoginRequiredMixin, DeleteView):
   model = Fish

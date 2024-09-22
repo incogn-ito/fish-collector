@@ -21,6 +21,7 @@ main {
   
   .logo-container {
     max-width: 375px;
+    align-items: ;
   }
   
   .fish-container {
@@ -32,6 +33,7 @@ main {
     width: 100%;
     max-width: 520px; /* Controls the logo size */
     height: auto;     /* Keeps aspect ratio intact */
+
     }
       
   .login {

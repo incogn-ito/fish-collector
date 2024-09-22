@@ -1,0 +1,39 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+table {
+    padding: 0 40px;
+    width: 100%;
+    border-spacing: 0 20px; /* Adds space between the rows */
+}
+
+th {
+    text-align: left;
+    padding: 6px 20px 0 0;
+    font-weight: normal;
+    vertical-align: top;
+    font-size: var(--font-reg); /* Use variable for consistent font size */
+}
+
+td {
+    max-width: 60%; /* Limit the width of the content in table cells */
+}
+
+td > * {
+    width: 100%; /* Make form fields fill the width of the container */
+    padding: 2px 4px; /* Small padding for the inputs */
+    font-size: var(--font-l); /* Font size for form inputs */
+}
+
+td > textarea {
+    height: calc(4 * var(--font-l) + 8px); /* Give the textarea enough height */
+    font-family: inherit; /* Use the same font family as the surrounding text */
+}
+
+.btn {
+    align-self: flex-end; /* Align the button to the right */
+    margin-right: 40px; /* Give the button some margin on the right */
+}

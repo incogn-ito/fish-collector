@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/fishes/fish-form.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+    {% if view.object %}
+    <h1>Edit {{ view.object.name }}</h1>
+    {% else %}
+    <h1>Add a Fish</h1>
+    {% endif %}
+    <img src="{% static 'images/fish-logo.png' %}" alt="Goldfish in a bowl"/>
+  </div>
+
+<form action="" method="post" class="form-container">
+  {% csrf_token %}
+  <table>
+    <!-- Name field -->
+    <tr>
+      <th><label for="name">Name</label></th>
+      <td>{{ form.name }}</td>
+    </tr>
+
+    <!-- Breed field -->
+    <tr>
+      <th><label for="breed">Breed</label></th>
+      <td>{{ form.breed }}</td>
+    </tr>
+
+    <!-- Age field -->
+    <tr>
+      <th><label for="age">Age</label></th>
+      <td>{{ form.age }}</td>
+    </tr>
+
+    <!-- Description field -->
+    <tr>
+      <th><label for="description">Description</label></th>
+      <td>{{ form.description }}</td>
+    </tr>
+
+    <!-- Image selection field -->
+    <tr>
+      <th><label for="image_url">Select an Image</label></th>
+      <td>{{ form.image_url }}</td>
+    </tr>
+
+    <!-- Show the selected image if editing -->
+    {% if view.object and view.object.image_url %}
+    <tr>
+      <th>Current Image</th>
+      <td><img src="{% static view.object.image_url %}" alt="{{ view.object.name }}"></td>
+    </tr>
+    {% endif %}
+  </table>
+
+  <!-- Submit button -->
+  <button type="submit" class="btn submit">Submit!</button>
+</form>
+
+{% endblock %}
