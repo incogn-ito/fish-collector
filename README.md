@@ -1,10 +1,9 @@
 # Fish Collector
-<img src = 'main_app/static/images/screenshot1.png' alt = 'Index page' width = 100%>
+<img src = 'main_app/static/images/screenshot2.png' alt = 'Index page' width = 100%>
 
 # Welcome to Fish Collector!
 I'm a 90s kid, so please enjoy this nostalgic, digital twist on the Tamagotchi Pets of my childhood. Collect colorful fish of your choosing and have fun adding feedings and toys to various fish you own!
 
-<img src = 'main_app/static/images/screenshot2.png' alt = 'Index page' width = 100%>
 <img src = 'main_app/static/images/screenshot3.png' alt = 'Index page' width = 100%>
 
 ## Key Features
